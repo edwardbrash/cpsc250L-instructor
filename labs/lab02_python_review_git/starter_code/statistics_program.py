@@ -31,8 +31,11 @@ def read_temperatures(filename):
     temperatures = []
 
     # TODO: Open the file and read each line.
+    f = open(filename, "r")
     # TODO: Convert each non-blank line to a float.
     # TODO: Append each temperature to the temperatures list.
+    for line in f:
+        temperatures.append(float(line))
 
     return temperatures
 
@@ -42,7 +45,11 @@ def compute_average(values):
     Compute the average of a list of numbers.
     """
     # TODO: Replace this with a correct average calculation.
-    return 0.0
+    average = 0.0
+    for value in values:
+        average += value
+    average /= len(values)
+    return average
 
 
 def compute_minimum(values):
@@ -50,7 +57,11 @@ def compute_minimum(values):
     Compute the minimum value in a list of numbers.
     """
     # TODO: Replace this with a correct minimum calculation.
-    return 0.0
+    minimum = values[0]
+    for value in values:
+        if value < minimum:
+            minimum = value
+    return minimum
 
 
 def compute_maximum(values):
@@ -58,7 +69,11 @@ def compute_maximum(values):
     Compute the maximum value in a list of numbers.
     """
     # TODO: Replace this with a correct maximum calculation.
-    return 0.0
+    maximum = values[0]
+    for value in values:
+        if value > maximum:
+            maximum = value
+    return maximum
 
 
 def print_summary(values):
