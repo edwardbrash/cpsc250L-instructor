@@ -4,7 +4,7 @@ from book import Book
 
 def create_inventory():
     """
-    Create and return a list of Book objects.
+    Read books from csv file, create and return a list of Book objects.
     """
     books = []
 
@@ -12,7 +12,11 @@ def create_inventory():
     f = open("../data/booklist.csv", "r")
     reader = csv.reader(f)
     for row in reader:
-        books.append(Book(row[0], row[1], row[2], row[3], row[4], row[5]))
+        # ignore header
+        if row[0] == "title":
+            continue
+        else:
+            books.append(Book(row[0], row[1], row[2], row[3], row[4], row[5]))
 
     return books
 
