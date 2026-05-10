@@ -40,4 +40,22 @@ class Book:
         """
         Compare books alphabetically by title.
         """
-        return self.title < other.title
+        # subtle point: let's ignore the first word of the title if it is "A" or "The"
+        #
+        #
+        # Get first word of self.title and other.title
+        self_first_word = self.title.split()[0]
+        other_first_word = other.title.split()[0]
+        # If first word is "A" or "The", strip it off for comparison
+        if self_first_word == "A" or self_first_word == "The":
+            self_title_comp = " ".join(self.title.split()[1:])
+        else:
+            self_title_comp = self.title
+
+        if other_first_word == "A" or other_first_word == "The":
+            other_title_comp = " ".join(self.title.split()[1:])
+        else:
+            other_title_comp = other.title
+
+        # make comparison
+        return self_title_comp < other_title_comp
