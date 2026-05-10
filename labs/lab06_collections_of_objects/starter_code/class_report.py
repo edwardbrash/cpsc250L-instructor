@@ -9,14 +9,34 @@ def clean_score(score_text):
 
     Return None if the score is missing or invalid.
     """
-    pass
+    try:
+        score = int(score_text)
+        if 0 <= score <= 100:
+            return score
+        else:
+            return None
+    except ValueError:
+        pass
+    return None
 
 
 def read_student_records(filename):
     """
     Read the CSV file and return a list of StudentRecord objects.
     """
-    pass
+    import csv
+    f = open(filename)
+    reader = csv.reader(f)
+    next(reader)  # Skip header row
+    students = []
+    for row in reader:
+        id = row[0]
+        name = row[1]
+        scores = [clean_score(score) for score in row[2:] if clean_score(score) is not None]
+        student = StudentRecord(name, id, scores)
+        students.append(student)
+    f.close()
+    return students
 
 
 def class_average(students):
@@ -25,14 +45,21 @@ def class_average(students):
 
     Ignore students with no valid scores.
     """
-    pass
+    total_average = 0
+    count = 0
+    for student in students:
+        average = student.calculate_average()
+        if average is not None:
+            total_average += average
+            count += 1
+    return total_average / count if count > 0 else None
 
 
 def find_highest_average_student(students):
     """
     Return the StudentRecord object with the highest average.
     """
-    pass
+
 
 
 def find_lowest_average_student(students):
@@ -46,7 +73,9 @@ def print_class_report(students):
     """
     Print all student records and a class summary.
     """
-    pass
+    print("Student records:")
+    for student in students:
+        print(student)
 
 
 def main():
@@ -54,4 +83,5 @@ def main():
     print_class_report(students)
 
 
-main()
+if __name__ == "__main__":
+    main()

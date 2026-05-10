@@ -9,6 +9,7 @@ Complete the TODO sections below.
 """
 
 from pathlib import Path
+import matplotlib.pyplot as plt
 
 
 def read_temperatures(filename):
@@ -76,6 +77,17 @@ def print_summary(values):
     print("Maximum temperature:", maximum)
     print("Average temperature:", average)
 
+def plot_histogram(values):
+    """
+    Plot a histogram of the temperature data.
+    """
+    fig, ax = plt.subplots()
+    ax.hist(values, bins=10, edgecolor='black')
+    ax.set_title("Temperature Distribution")
+    ax.set_xlabel("Temperature (F)")
+    ax.set_ylabel("Frequency")
+    plt.show()
+
 
 def main():
     """
@@ -84,6 +96,7 @@ def main():
     data_file = Path(__file__).resolve().parent.parent / "data" / "temperatures.txt"
     temperatures = read_temperatures(data_file)
     print_summary(temperatures)
+    plot_histogram(temperatures)
 
 
 if __name__ == "__main__":
