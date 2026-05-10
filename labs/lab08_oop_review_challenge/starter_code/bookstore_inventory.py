@@ -8,7 +8,6 @@ def create_inventory():
     """
     books = []
 
-    # TODO: Read books from csv file in ~/data/booklist.csv
     import csv
     f = open("../data/booklist.csv", "r")
     reader = csv.reader(f)
